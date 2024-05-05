@@ -5,10 +5,12 @@ import { BsPencilSquare } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import "./Home.css";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
+  const [greet, setGreet] = useState();
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,6 +21,10 @@ export default function Home() {
       }
       try {
         const notes = await loadNotes();
+        const user = await Auth.currentAuthenticatedUser();
+        console.log(user);
+        const { attributes } = user;
+        setGreet(attributes.email);
         setNotes(notes);
       } catch (e) {
         onError(e);
@@ -69,6 +75,7 @@ export default function Home() {
   function renderNotes() {
     return (
       <div className="notes">
+        <h2>Welcome, <span>{greet}</span></h2>
         <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
         <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
       </div>

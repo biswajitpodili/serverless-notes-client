@@ -5,6 +5,7 @@ import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
+import { LinkContainer } from "react-router-bootstrap";
 import "./Login.css";
 export default function Login() {
   const { userHasAuthenticated } = useAppContext();
@@ -14,11 +15,9 @@ export default function Login() {
     password: "",
   });
 
-  
   function validateForm() {
     return fields.email.length > 0 && fields.password.length > 0;
   }
-
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -31,7 +30,6 @@ export default function Login() {
       setIsLoading(false);
     }
   }
-
 
   return (
     <div className="Login">
@@ -53,6 +51,12 @@ export default function Login() {
             onChange={handleFieldChange}
           />
         </Form.Group>
+
+        <LinkContainer to="/forget">
+          <h6 className="forgetPassword">
+            <span>Forget Password?</span>
+          </h6>
+        </LinkContainer>
         <LoaderButton
           block
           size="lg"
