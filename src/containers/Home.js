@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
 import { Auth } from "aws-amplify";
+import Button from "react-bootstrap/Button";
 import "./Home.css";
 
 export default function Home() {
@@ -22,7 +23,6 @@ export default function Home() {
       try {
         const notes = await loadNotes();
         const user = await Auth.currentAuthenticatedUser();
-        console.log(user);
         const { attributes } = user;
         setGreet(attributes.email);
         setNotes(notes);
@@ -66,8 +66,17 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>Scratch</h1>
+        <h1>NoteCraft</h1>
         <p className="text-muted">A simple note taking app</p>
+        <div className="box">
+          <LinkContainer to="/signup">
+            <Button variant="success">Sign up</Button>
+          </LinkContainer>
+          <LinkContainer to="/login">
+          <Button className="ml-4" variant="primary">Login</Button>
+          </LinkContainer>
+          
+        </div>
       </div>
     );
   }
@@ -75,7 +84,9 @@ export default function Home() {
   function renderNotes() {
     return (
       <div className="notes">
-        <h2>Welcome, <span>{greet}</span></h2>
+        <h2>
+          Welcome, <span>{greet}</span>
+        </h2>
         <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
         <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
       </div>

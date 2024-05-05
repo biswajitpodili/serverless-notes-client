@@ -1,6 +1,6 @@
 {
-  "short_name": "Scratch",
-  "name": "Scratch Note Taking App",
+  "short_name": "NoteCraft",
+  "name": "NoteCraft Note Taking App",
   "icons": [
     {
       "src": "android-chrome-144x144.png",

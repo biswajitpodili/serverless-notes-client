@@ -6,4 +6,7 @@
     margin: 0 auto;
     max-width: 320px;
   }
+  .Signup h2{
+    padding-bottom: 25px;
+}
 }

@@ -18,7 +18,7 @@ export default function ForgetPassword() {
   }
 
   function validateConfirmationForm() {
-    return confirmationCode.length && password.length > 0;
+    return confirmationCode.length > 0 && password.length > 0;
   }
 
   function handleEmailChange(e) {
@@ -53,11 +53,7 @@ export default function ForgetPassword() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await Auth.forgotPasswordSubmit(
-        email,
-        confirmationCode,
-        password
-      );
+      await Auth.forgotPasswordSubmit(email, confirmationCode, password);
 
       history.push("/login");
     } catch (e) {
