@@ -115,20 +115,23 @@ export default function Notes() {
               onChange={(e) => setContent(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="file">
-            <Form.Label>Attachment</Form.Label>
-            {note.attachment && (
-              <p>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={note.attachmentURL}
-                >
-                  {formatFilename(note.attachment)}
-                </a>
-              </p>
-            )}
+          <Form.Group className="file" controlId="file">
+            <div>
+              <Form.Label>Attachment</Form.Label>
+              {note.attachment && (
+                <p>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={note.attachmentURL}
+                  >
+                    {formatFilename(note.attachment)}
+                  </a>
+                </p>
+              )}
+            </div>
             <Form.Control onChange={handleFileChange} type="file" />
+            <img src={note.attachmentURL}></img>
           </Form.Group>
           <LoaderButton
             block
